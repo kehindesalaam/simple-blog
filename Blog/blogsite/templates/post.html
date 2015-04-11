@@ -1,0 +1,4 @@
+﻿{% extends 'base.html' %}
+{% block title %} Post - {{ posts.title }} {% endblock %}
+
+{% block content %} {{ posts.objects.all() }} {% endblock %} 

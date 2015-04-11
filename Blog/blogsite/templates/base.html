@@ -1,0 +1,24 @@
+﻿{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" href="{% static 'blogsite/content/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+      panel-heading, body{
+          background-color:#7acee1;
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</body>
+</html>

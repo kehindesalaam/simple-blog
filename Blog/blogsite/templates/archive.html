@@ -1,0 +1,57 @@
+﻿{% extends 'base.html' %}
+
+{% block title %}archive blogs{% endblock %}
+
+{% block content %}
+        <div class="jumbotron">
+            <h1>Kenny's Blog</h1>
+    </div>
+    
+    
+    {% if posts %}
+        {% for post in posts %}
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                <h2 class="panel-title">
+                <a href="{{ post.get_absolute_url }}" >
+                    {{ post.title }}</a></h2>
+                </div>
+                <small>{{ post.timestamp|date:"l, F jS"}} {{ inv }}</small>
+
+                <div class="panel-body">
+                <p>{{ post.body }}</p>
+                
+                <hr />
+                {% for comment in post.comment_set.all %}
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ comment.name }}</h4>
+                        <p class="col-md-6"> {{ comment.body }} </p>
+                    </div>
+                </div>
+                {% endfor %}
+                     <hr />
+                <p class="pull-left">Comment:</p>
+                   
+                <form action="{% url 'blog:comment' post.id%}"  method="post" role="form">
+                    {% csrf_token %}
+                    <div class="form-group" >
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                       {{ form.body }}
+                     </div>
+                    {{ form.post }}
+                    <button type="submit" name="p" value={{ post.id }} class="btn btn-default pull-right " >Comment</button>
+                </form>
+                </div>
+            </div>
+        {% endfor %}
+    
+    {% else %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.timestamp|date:"l, F jS"}}</p>
+        <p>{{ post.body }}</p>
+    {% endif %}
+{% endblock %}
+
